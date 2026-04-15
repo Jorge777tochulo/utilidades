@@ -460,12 +460,10 @@ int generaAleatorioEntero (int limite)
 //    en una cantidad. Nos ayudamos de otra función creada en esta librería,
 //    vaciarBuffer() para ello. No muestra ningún mensaje por pantalla.
 //
-//  PARÁMETROS DE ENTRADA:
+// PARÁMETROS DE ENTRADA:
 //
-//    nlineas
+//    Ninguno
 //
-//      Variable entera que recibirá del exterior el número de líneas en blanco
-//      que se va a desplazar el cursor hacia abajo.
 //
 //  VALOR DE SALIDA:
 //
