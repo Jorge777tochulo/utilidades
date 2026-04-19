@@ -71,6 +71,38 @@ void esperarINTRO (void)
   vaciarBuffer();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCIÓN:
+//
+//     void descartarEntrada (void)
+
+//
+//  USO:
+//
+//    Programa que descarta cualquier dato pendiente en el buffer de entrada.
+//
+//  DETALLES:
+//
+//   Esta función simplemente llama a vaciarBuffer(), que es la que realmente
+//    hace el trabajo. Se usa para tener otro nombre más claro para la misma acción.
+//
+//
+//  PARÁMETROS DE ENTRADA:
+//
+//    Ninguno
+//
+//  VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+//  FUNCIONES DE LAS QUE DEPENDE:
+//
+//    vaciarBuffer()
+//
+//      Se delega toda la carga de trabajo a esta función.
+//
+////////////////////////////////////////////////////////////////////////////////
 
 void descartarEntrada (void)
 {
@@ -127,12 +159,79 @@ void vaciarBuffer (void)
   // while (getchar() != '\n')   ; // Bucle vacío
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCIÓN:
+//
+//     void borrarPantalla (void)
+
+//
+//  USO:
+//
+//    Sirve para limpiar la pantalla.
+//
+//  DETALLES:
+//
+//  Esta función borra todo lo que hay en la pantalla llamando a
+//    limpiarPantalla(), que es la que hace realmente el trabajo.
+
+//
+//
+//  PARÁMETROS DE ENTRADA:
+//
+//    Ninguno
+//
+//  VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+//  FUNCIONES DE LAS QUE DEPENDE:
+//
+//    limpiarPantalla()
+//
+//    Esta función es la que se encarga de limpiar la pantalla.
+//
+////////////////////////////////////////////////////////////////////////////////
 
 void borrarPantalla (void)
 {
   limpiarPantalla();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCIÓN:
+//
+//     void limpiarPantalla (void)
+
+//
+//  USO:
+//
+//    Sirve para limpiar la pantalla.
+//
+//  DETALLES:
+//
+//    Esta función usa system(BORRAR) para limpiar la pantalla.
+//    BORRAR suele guardar el comando que se necesita para hacerlo
+//    (por ejemplo "cls" o "clear").
+
+//
+//
+//  PARÁMETROS DE ENTRADA:
+//
+//    Ninguno
+//
+//  VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+//  FUNCIONES DE LAS QUE DEPENDE:
+//
+//     system()
+//
+//    Se usa para ejecutar el comando que limpia la pantalla.
+//
+////////////////////////////////////////////////////////////////////////////////
 
 void limpiarPantalla (void)
 {
@@ -188,24 +287,160 @@ void bajar (int nlineas)
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCIÓN:
+//
+//    void abajo (int nfils)
+
+//
+//  USO:
+//
+//    Sirve para bajar un número de líneas en la pantalla.
+
+//
+//  DETALLES:
+//
+//   Esta función llama a bajar(nfiles), que es la que realmente
+//    se encarga de mover hacia abajo las líneas indicadas.
+
+//
+//
+//  PARÁMETROS DE ENTRADA:
+//
+//  nfiles → número de líneas que se quieren bajar.
+//
+//  VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+//  FUNCIONES DE LAS QUE DEPENDE:
+//
+//      bajar()
+//
+//    Es la función que realiza el movimiento hacia abajo.
+//
+////////////////////////////////////////////////////////////////////////////////
 
 void abajo (int nfils)
 {
   bajar(nfils);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCIÓN:
+//
+//    void saltar (int nfils)
+
+//
+//  USO:
+//
+//    Sirve para saltar un número de líneas en la pantalla.
+
+//
+//  DETALLES:
+//
+//   Esta función llama a saltar(nfiles), que es la que realmente
+//    se encarga de saltarse  las líneas indicadas.
+
+//
+//
+//  PARÁMETROS DE ENTRADA:
+//
+//  nfiles → número de líneas que se quieren saltar.
+//
+//  VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+//  FUNCIONES DE LAS QUE DEPENDE:
+//
+//      bajar()
+//
+//    Es la función que realiza el movimiento de saltar.
+//
+////////////////////////////////////////////////////////////////////////////////
 
 void saltar (int nfils)
 {
   bajar(nfils);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCIÓN:
+//
+//    void desplazarFils (int nfils)
+
+//
+//  USO:
+//
+//    Sirve para desplazar un número de líneas en la pantalla.
+
+//
+//  DETALLES:
+//
+//   Esta función llama a bajar(nfiles), que es la que realmente
+//    se encarga de desplazar  las líneas indicadas.
+
+//
+//
+//  PARÁMETROS DE ENTRADA:
+//
+//  nfiles → número de líneas que se quieren desplazar.
+//
+//  VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+//  FUNCIONES DE LAS QUE DEPENDE:
+//
+//      bajar()
+//
+//    Es la función que realiza el movimiento de desplazar.
+//
+////////////////////////////////////////////////////////////////////////////////
 
 void desplazarFils (int nfils)
 {
   bajar(nfils);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCIÓN:
+//
+//    void desplazarV (int nfils)
+
+//
+//  USO:
+//
+//    Sirve para desplazar un número de líneas en la pantalla verticalmente.
+
+//
+//  DETALLES:
+//
+//   Esta función llama a bajar(nfiles), que es la que realmente
+//    se encarga de desplazar las líneas indicadas verticalmente.
+
+//
+//
+//  PARÁMETROS DE ENTRADA:
+//
+//  nfiles → número de líneas que se quieren desplazar verticalmente.
+//
+//  VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+//  FUNCIONES DE LAS QUE DEPENDE:
+//
+//      bajar()
+//
+//    Es la función que realiza el movimiento de desplazar verticalmete.
+//
+////////////////////////////////////////////////////////////////////////////////
 
 void desplazarV (int nfils)
 {
