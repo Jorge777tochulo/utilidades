@@ -447,12 +447,70 @@ void desplazarV (int nfils)
   bajar(nfils);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void desplazarV(int nfils);
+//
+// USO:
+//
+//    Programa que produce un desplazamiento vertical en la consola.
+//
+// DETALLES:
+//
+//    Es un envoltorio de la función bajar(), a la cual delega todo el
+//    trabajo. Es una manera de crear "sinónimos" de acciones para que
+//    el código sea más legible según el contexto.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    nfils: Número de líneas que se desea desplazar hacia abajo.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve ningún valor.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    bajar()
+//       Se delega toda la carga de trabajo a esta función.
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void desplazarY (int nfils)
 {
   bajar(nfils);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void indentar(int columnas);
+//
+// USO:
+//
+//    Añade espacios en blanco al principio de una línea.
+//
+// DETALLES:
+//
+//    Sirve para dejar un margen a la izquierda. Se usa printf directo 
+//    para evitar que el programa se raye llamando a otras funciones.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    columnas: Cuántos espacios queremos poner.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    printf()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void indentar (int ncolumnas)
 {
@@ -462,36 +520,212 @@ void indentar (int ncolumnas)
   }
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void derecha(int ncols);
+//
+// USO:
+//
+//    Mueve el cursor hacia la derecha antes de escribir.
+//
+// DETALLES:
+//
+//    Es un sinónimo de indentar(). Se usa para que el código sea más 
+//    fácil de leer cuando queremos alinear algo a la derecha.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    ncols: El número de espacios que queremos desplazar.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    indentar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void derecha (int ncols)
 {
   indentar(ncols);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void tabular(int ncols);
+//
+// USO:
+//
+//    Sirve para organizar el texto en columnas.
+//
+// DETALLES:
+//
+//    Es otro sinónimo de indentar(). Se llama así para que el código
+//    se entienda mejor cuando estamos haciendo tablas o listas.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    ncols: El número de espacios para la tabulación.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    indentar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void tabular (int ncols)
 {
   indentar(ncols);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void desplazarCols(int ncols);
+//
+// USO:
+//
+//    Desplaza el texto hacia la derecha por columnas.
+//
+// DETALLES:
+//
+//    Es un sinónimo de indentar(). Se usa para que el código sea claro
+//    cuando el objetivo es mover la posición horizontal del texto.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    ncols: Cantidad de espacios (columnas) que se quiere desplazar.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    indentar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void desplazarCols (int ncols)
 {
   indentar(ncols);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void desplazarX(int ncols);
+//
+// USO:
+//
+//    Mueve el texto de forma horizontal (en el eje X).
+//
+// DETALLES:
+//
+//    Es un sinónimo de indentar(). Se llama así para aclarar que el 
+//    movimiento es lateral, como en las gráficas de matemáticas.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    ncols: El número de espacios que se desplaza a la derecha.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    indentar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void desplazarX (int ncols)
 {
   indentar(ncols);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void desplazarH(int ncols);
+//
+// USO:
+//
+//    Mueve el texto de forma horizontal por la pantalla.
+//
+// DETALLES:
+//
+//    Es un sinónimo de indentar(). La "H" sirve para recordar que el
+//    desplazamiento es Horizontal (de izquierda a derecha).
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    ncols: El número de espacios que queremos desplazar.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    indentar()
+//
+////////////////////////////////////////////
 
 void desplazarH (int ncols)
 {
   indentar(ncols);
 }
 
+Esta función es la que une todo lo anterior. Sirve para mover el cursor a un punto exacto de la pantalla (como si fuera una coordenada).
+
+Aquí tienes la ficha resumida:
+
+Código y Documentación en C
+C
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void posicionar(int nfils, int ncols);
+//
+// USO:
+//
+//    Coloca el cursor en una posición concreta de la pantalla.
+//
+// DETALLES:
+//
+//    Combina bajar() e indentar() para elegir la fila y la columna 
+//    donde queremos empezar a escribir. Es como dar una dirección exacta.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    nfils: Cuántas líneas bajamos (posición vertical).
+//    ncols: Cuántos espacios nos movemos (posición horizontal).
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    bajar()
+//    tabular() (que a su vez llama a indentar)
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void posicionar (int nfils, int ncols)
 {
@@ -499,18 +733,105 @@ void posicionar (int nfils, int ncols)
   tabular(ncols);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void desplazar(int nfils, int ncols);
+//
+// USO:
+//
+//    Mueve el cursor a una posición específica de la pantalla.
+//
+// DETALLES:
+//
+//    Es un sinónimo de posicionar(). Se usa para que el código sea más
+//    fácil de leer cuando queremos decir "muévete a este sitio".
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    nfils: El número de filas que bajamos.
+//    ncols: El número de columnas que nos movemos a la derecha.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    posicionar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void desplazar (int nfils, int ncols)
 {
   posicionar(nfils, ncols);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void desplazarXY(int nfils, int ncols);
+//
+// USO:
+//
+//    Mueve el cursor usando coordenadas de filas y columnas.
+//
+// DETALLES:
+//
+//    Es un sinónimo de posicionar(). Se llama así para que parezca que
+//    estamos trabajando sobre un plano con coordenadas X e Y.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    nfils: El número de filas (eje Y).
+//    ncols: El número de columnas (eje X).
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    posicionar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void desplazarXY (int nfils, int ncols)
 {
   posicionar(nfils, ncols);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void retardoSegundos(int segundosmax);
+//
+// USO:
+//
+//    Hace que el programa se detenga durante unos segundos.
+//
+// DETALLES:
+//
+//    Obliga al ordenador a contar números muy altos sin hacer nada más.
+//    Se usan varios bucles metidos unos dentro de otros para que el 
+//    tiempo de espera sea lo más parecido a segundos reales.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    segundosmax: El número de segundos que queremos que dure la pausa.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    Ninguna.
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void retardoSegundos (int segundosmax)
 {
@@ -526,6 +847,35 @@ void retardoSegundos (int segundosmax)
   }
 }
 
+///////////
+//
+// FUNCIÓN:
+//
+//    void retardoMilisegundos(int milisegundosmax);
+//
+// USO:
+//
+//    Hace que el programa se detenga durante un tiempo muy breve.
+//
+// DETALLES:
+//
+//    Es una pausa de precisión. Sirve para esperar milésimas de segundo.
+//    Igual que con los segundos, el ordenador se pone a contar números 
+//    en bucle para "perder el tiempo" de forma controlada.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    milisegundosmax: El número de milisegundos que queremos esperar.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    Ninguna.
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void retardoMilisegundos (int milisegundosmax)
 {
@@ -538,6 +888,37 @@ void retardoMilisegundos (int milisegundosmax)
       for (j=0; j<1000; j++)   ;
 }
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void retrasoMilisegundos(int milisegundos);
+//
+// USO:
+//
+//    Crea una pausa exacta usando el reloj del sistema.
+//
+// DETALLES:
+//
+//    A diferencia de los bucles de antes, esta función pregunta la hora al
+//    ordenador constantemente hasta que han pasado los milisegundos 
+//    que le pedimos. Es mucho más precisa y no depende de la velocidad
+//    del procesador.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    milisegundos: El tiempo exacto que queremos esperar.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    clock() y la constante CLOCKS_PER_SEC (de la librería <time.h>).
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void retrasoMilisegundos (int milisegundos)
 {
@@ -554,6 +935,36 @@ void retrasoMilisegundos (int milisegundos)
 }
 
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void esperarSegundos(int segundos);
+//
+// USO:
+//
+//    Detiene el programa durante unos segundos de forma automática.
+//
+// DETALLES:
+//
+//    Es una función "todo terreno". Si el ordenador usa Windows, usa una
+//    orden llamada Sleep; si usa otro sistema (como Linux), usa sleep.
+//    Así el programa funciona bien en cualquier ordenador.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    segundos: El tiempo que queremos que el programa se pare.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    Sleep() de Windows o sleep() de librerías estándar.
+//
+/////////////////////////////////////////////////////////////////////////////
+
 void esperarSegundos (int segundos)
 {
   #ifdef SO_WINDOWS
@@ -563,6 +974,35 @@ void esperarSegundos (int segundos)
   #endif
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void esperarMilisegundos(int milisegundos);
+//
+// USO:
+//
+//    Hace una pausa precisa de milésimas de segundo.
+//
+// DETALLES:
+//
+//    Al igual que la de segundos, esta función detecta si estás en Windows 
+//    o en otro sistema. Es muy útil para pequeñas pausas en animaciones 
+//    o para que el texto no aparezca de golpe.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    milisegundos: El tiempo de espera (1000 milisegundos = 1 segundo).
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    Sleep() en Windows o usleep() en otros sistemas.
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void esperarMilisegundos (int milisegundos)
 {
@@ -573,18 +1013,110 @@ void esperarMilisegundos (int milisegundos)
   #endif
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void pausa(void);
+//
+// USO:
+//
+//    Detiene el programa durante un momento predefinido.
+//
+// DETALLES:
+//
+//    Es un atajo que llama a pausaEstandar con unos valores fijos 
+//    (1 y 2). Se usa para no tener que escribir los números a mano 
+//    cada vez que queremos que el programa se pare un poco.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    Ninguno (void).
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    pausaEstandar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void pausa (void)
 {
   pausaEstandar(1, 2);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void pausaEstandar(int nfils, int ncols);
+//
+// USO:
+//
+//    Muestra un mensaje de pausa en una posición fija de la pantalla.
+//
+// DETALLES:
+//
+//    Llama a pausaGenerica usando un mensaje ya definido (MSJxPAUSA). 
+//    Se asegura de que el mensaje aparezca en la fila y columna que le 
+//    digamos, y le dice al programa que no borre la pantalla (FALSE).
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    nfils: La fila donde queremos que salga el mensaje.
+//    ncols: La columna donde queremos que salga el mensaje.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    pausaGenerica()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void pausaEstandar (int nfils, int ncols)
 {
   pausaGenerica(MSJxPAUSA, nfils, ncols, FALSE);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void pausaGenerica(char msjtxt[], int nfils, int ncols, boolean nuevalinea);
+//
+// USO:
+//
+//    Muestra un mensaje personalizado y espera a que el usuario pulse INTRO.
+//
+// DETALLES:
+//
+//    Es la función principal para detener el programa. Primero escribe el 
+//    texto en la posición elegida y luego se queda "congelada" llamando a 
+//    esperarINTRO() hasta que el usuario reaccione.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto que queremos que aparezca (el mensaje).
+//    nfils: La fila de la pantalla.
+//    ncols: La columna de la pantalla.
+//    nuevalinea: Indica si queremos saltar de línea después del mensaje.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje_x_y()
+//    esperarINTRO()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void pausaGenerica (char msjtxt[], int nfils, int ncols, boolean nuevalinea)
 {
@@ -593,66 +1125,395 @@ void pausaGenerica (char msjtxt[], int nfils, int ncols, boolean nuevalinea)
   esperarINTRO();
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void texto(char msjtxt[]);
+//
+// USO:
+//
+//    Escribe una cadena de caracteres (un mensaje) en la pantalla.
+//
+// DETALLES:
+//
+//    Es un sinónimo de la función estándar puts(). Se utiliza para que 
+//    el código sea más legible para personas que no hablan inglés o 
+//    que prefieren términos más descriptivos.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto que queremos mostrar.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    puts() (de la librería estándar <stdio.h>)
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void texto (char msjtxt[])
 {
   puts(msjtxt);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void separar(void);
+//
+// USO:
+//
+//    Añade una línea en blanco en la consola.
+//
+// DETALLES:
+//
+//    Es una función estética. Simplemente imprime un salto de línea (\n)
+//    para separar bloques de texto y que la interfaz sea más limpia.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    Ninguno.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mostrar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void separar()
 {
   mostrar("\n");
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void nuevaLinea(void);
+//
+// USO:
+//
+//    Baja el cursor a la línea siguiente.
+//
+// DETALLES:
+//
+//    Es un sinónimo de saltar(1). Se utiliza para que el código sea más
+//    descriptivo cuando solo queremos bajar una línea y no un número 
+//    variable de ellas.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    Ninguno (void).
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    saltar()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void nuevaLinea (void)
 {
   saltar(1);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void mostrar(char msjtxt[]);
+//
+// USO:
+//
+//    Muestra un mensaje en la posición actual del cursor.
+//
+// DETALLES:
+//
+//    Es una versión simplificada de mostrar_x_y(). Al usar los valores 
+//    0 para filas y 0 para columnas, el texto aparece inmediatamente 
+//    después de lo último que se haya escrito.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: La cadena de texto o mensaje que queremos imprimir.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mostrar_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void mostrar (char msjtxt[])
 {
   mostrar_x_y (msjtxt, 0, 0);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void mostrar_x_y(char msjtxt[], int nfils, int ncols);
+//
+// USO:
+//
+//    Muestra un texto en una posición específica sin avanzar a la siguiente línea.
+//
+// DETALLES:
+//
+//    Es una versión simplificada de mensaje_x_y(). Utiliza el valor 
+//    FALSE para el parámetro 'nuevalinea', lo que significa que el cursor 
+//    se quedará justo al final del texto impreso. Es ideal para mostrar 
+//    etiquetas de datos (ej: "Nombre: ").
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto que queremos imprimir.
+//    nfils: Cuántas filas bajar antes de escribir.
+//    ncols: Cuántas columnas desplazar a la derecha antes de escribir.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void mostrar_x_y (char msjtxt[], int nfils, int ncols)
 {
   mensaje_x_y (msjtxt, nfils, ncols, FALSE);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void escribir(char msjtxt[]);
+//
+// USO:
+//
+//    Escribe un mensaje en la posición actual del cursor.
+//
+// DETALLES:
+//
+//    Es un atajo de escribir_x_y(). Al pasarle los valores 0 y 0, el texto
+//    se imprime en el lugar donde se quedó el cursor tras la última 
+//    operación, sin añadir saltos ni desplazamientos extra.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: La cadena de texto que queremos imprimir.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    escribir_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void escribir (char msjtxt[])
 {
   escribir_x_y (msjtxt, 0, 0);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void escribir_x_y(char msjtxt[], int nfils, int ncols);
+//
+// USO:
+//
+//    Escribe un texto en una posición determinada sin saltar de línea.
+//
+// DETALLES:
+//
+//    Funciona exactamente igual que mostrar_x_y(). Se mantiene para ofrecer
+//    flexibilidad en el lenguaje (usar "escribir" o "mostrar" según prefiera
+//    el programador) y asegura que el cursor se quede al final del mensaje.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto que se va a imprimir.
+//    nfils: Desplazamiento vertical (filas).
+//    ncols: Desplazamiento horizontal (columnas).
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void escribir_x_y (char msjtxt[], int nfils, int ncols)
 {
   mensaje_x_y (msjtxt, nfils, ncols, FALSE);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void imprimir(char msjtxt[]);
+//
+// USO:
+//
+//    Muestra un texto en la posición actual donde se encuentre el cursor.
+//
+// DETALLES:
+//
+//    Es un atajo de imprimir_x_y(). Se utiliza para imprimir mensajes de 
+//    forma sencilla, sin desplazamientos adicionales y manteniendo el 
+//    cursor en la misma línea al terminar.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto que queremos que aparezca en pantalla.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    imprimir_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void imprimir (char msjtxt[])
 {
   imprimir_x_y (msjtxt, 0, 0);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void imprimir_x_y(char msjtxt[], int nfils, int ncols);
+//
+// USO:
+//
+//    Escribe un texto en una posición específica sin saltar a la línea siguiente.
+//
+// DETALLES:
+//
+//    Es idéntica a mostrar_x_y() y escribir_x_y(). Se asegura de que el 
+//    parámetro 'nuevalinea' sea FALSE para que, tras imprimir el mensaje, 
+//    el cursor se quede pegado al final del texto (muy útil para pedir 
+//    datos justo después del mensaje).
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto a mostrar.
+//    nfils: Filas de desplazamiento.
+//    ncols: Columnas de desplazamiento.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void imprimir_x_y (char msjtxt[], int nfils, int ncols)
 {
   mensaje_x_y (msjtxt, nfils, ncols, FALSE);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void mensaje(char msjtxt[], int nfils, int ncols);
+//
+// USO:
+//
+//    Escribe un mensaje en una posición determinada sin saltar de línea.
+//
+// DETALLES:
+//
+//    Es una función de conveniencia que llama a mensaje_x_y(). Se diferencia
+//    de las versiones anteriores en que su nombre es más genérico ("mensaje").
+//    Mantiene el parámetro 'nuevalinea' como FALSE para que el cursor no
+//    baje a la siguiente fila automáticamente.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto que se desea mostrar.
+//    nfils: El número de filas a desplazar.
+//    ncols: El número de columnas a desplazar.
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void mensaje (char msjtxt[], int nfils, int ncols)
 {
   mensaje_x_y (msjtxt, nfils, ncols, FALSE);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void mensaje_x_y(char msjtxt[], int nfils, int ncols, boolean nuevalinea);
+//
+// USO:
+//    Control total sobre la impresión: posición (filas/columnas) y salto de línea.
+//
+// DETALLES:
+//    Es la función base que utilizan todas las demás (mostrar, escribir, etc.).
+//    Primero mueve el cursor verticalmente (saltar) y horizontalmente (tabular),
+//    luego imprime el texto y, finalmente, decide si añade un salto de línea
+//    según el valor lógico de 'nuevalinea'.
+//
+// PARÁMETROS DE ENTRADA:
+//    msjtxt[]:   El mensaje a mostrar.
+//    nfils:      Cuántas líneas bajar antes de escribir.
+//    ncols:      Cuántos espacios (tabulaciones) mover a la derecha.
+//    nuevalinea: Si es TRUE, salta a la siguiente línea tras el mensaje.
+//                Si es FALSE, el cursor se queda al final del texto.
+//
+// VALOR DE SALIDA:
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//    saltar(), tabular(), printf()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void mensaje_x_y (char msjtxt[], int nfils, int ncols, boolean nuevalinea)
 {
@@ -663,12 +1524,72 @@ void mensaje_x_y (char msjtxt[], int nfils, int ncols, boolean nuevalinea)
   if (nuevalinea)   printf("\n");   // ALTERNATIVA: if (nuevalinea)   putchar(ENTER);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    void iniciaAleatorizador(void);
+//
+// USO:
+//
+//    Prepara el ordenador para generar números al azar diferentes cada vez.
+//
+// DETALLES:
+//
+//    Si no usas esta función, el ordenador siempre dará los mismos números 
+//    "aleatorios" cada vez que abras el programa. Al usar time(NULL), 
+//    usamos la hora actual como "semilla", asegurando que cada partida 
+//    sea distinta.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    Ninguno (void).
+//
+// VALOR DE SALIDA:
+//
+//    No devuelve nada.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    srand() (de <stdlib.h>) y time() (de <time.h>).
+//
+/////////////////////////////////////////////////////////////////////////////
 
 void iniciaAleatorizador (void)
 {
   srand(time(NULL));
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    int generaAleatorioEntero(int limite);
+//
+// USO:
+//
+//    Obtiene un número entero al azar entre 0 y el límite indicado.
+//
+// DETALLES:
+//
+//    Utiliza el operador de módulo (%) para "cortar" el número que da el
+//    ordenador y que siempre caiga dentro del rango que queremos. 
+//    Es importante recordar que el número devuelto será como máximo 
+//    'limite - 1'.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    limite: El tope superior del rango (no incluido).
+//
+// VALOR DE SALIDA:
+//    
+//    Devuelve el número aleatorio generado.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    rand() (de <stdlib.h>).
+//
+/////////////////////////////////////////////////////////////////////////////
 
 int generaAleatorioEntero (int limite)
 {
