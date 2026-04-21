@@ -1645,12 +1645,77 @@ int obtenerEntero (void)
   return valor;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    char obtenerCaracterASCII(void);
+//
+// USO:
+//
+//    Captura un carácter o símbolo desde el teclado.
+//
+// DETALLES:
+//
+//    Es un sinónimo de obtenerLetra(). Se utiliza para dejar claro en el 
+//    código que lo que nos interesa es el valor del carácter según la 
+//    tabla ASCII, sea una letra, un número o un signo de puntuación.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    Ninguno.
+//
+// VALOR DE SALIDA:
+//
+//    Devuelve el carácter (char) que el usuario haya pulsado.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    obtenerLetra()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 char obtenerCaracterASCII()
 {
   return obtenerLetra();
 }
 
+Esta es una función de entrada de datos muy robusta. Su objetivo no es solo capturar una tecla, sino asegurarse de que lo que el usuario escribe sea un carácter estándar y, lo más importante, mantener el "buffer" (la memoria temporal del teclado) limpio para que el programa no se vuelva loco en la siguiente pregunta.
+
+Código y Documentación en C
+C
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    char obtenerLetra(void);
+//
+// USO:
+//
+//    Captura un carácter del teclado y limpia el buffer de entrada.
+//
+// DETALLES:
+//
+//    1. Lee un carácter con getchar().
+//    2. Filtra que sea ASCII estándar (menor que 128). Si es un carácter
+//       especial extraño, devuelve el carácter nulo '\0'.
+//    3. Si el usuario escribió varias letras o pulsó INTRO, llama a 
+//       vaciarBuffer() para eliminar los restos y que no afecten a la 
+//       siguiente lectura.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    Ninguno (void).
+//
+// VALOR DE SALIDA:
+//
+//    La letra capturada (si es válida) o '\0' (si no lo es).
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    getchar() (de <stdio.h>), vaciarBuffer()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 char obtenerLetra (void)   // Sólo ASCII VÁLIDO.
 {
@@ -1732,6 +1797,40 @@ int pedirEntero (char msjtxt[], int ncols)
   return obtenerEntero();
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    int pedirEnteroPositivo(char msjtxt[], int ncols, boolean mostrarerror);
+//
+// USO:
+//
+//    Pide un número al usuario y no le deja avanzar hasta que sea 0 o mayor.
+//
+// DETALLES:
+//
+//    Es como un guardia de seguridad. Muestra tu mensaje, lee lo que el 
+//    usuario escribe y chequea si es un número negativo. Si el usuario 
+//    se equivoca y pone algo como "-5", la función muestra un aviso de 
+//    error y le vuelve a preguntar otra vez, en un bucle infinito hasta 
+//    que ponga un número válido.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto de la pregunta (ej: "Dime tu edad").
+//    ncols: Cuántas columnas de espacio dejar a la izquierda.
+//    mostrarerror: Si es TRUE, avisa al usuario cuando se equivoca. 
+//                  Si es FALSE, simplemente repite la pregunta en silencio.
+//
+// VALOR DE SALIDA:
+//
+//    Devuelve el número entero (ya verificado como positivo) que puso el usuario.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje(), mostrar(), obtenerEntero(), nuevaLinea(), mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 int pedirEnteroPositivo (char msjtxt[], int ncols, boolean mostrarerror)
 {
@@ -1758,6 +1857,40 @@ int pedirEnteroPositivo (char msjtxt[], int ncols, boolean mostrarerror)
   return num;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    int pedirEnteroIntervalo(char msjtxt[], int ncols, boolean mostrarerror, int min, int max);
+//
+// USO:
+//
+//    Pide un número y obliga al usuario a que esté entre un mínimo y un máximo.
+//
+// DETALLES:
+//
+//    Es la función de validación más completa. Muestra el mensaje y, entre 
+//    corchetes, informa al usuario del rango permitido [min, max]. Si el 
+//    usuario mete un número fuera de ese "intervalo" (por ejemplo, un 20 
+//    cuando el máximo es 10), la función da un error y le obliga a repetir.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El texto de la pregunta.
+//    ncols: Espacios de margen a la izquierda.
+//    mostrarerror: Si es TRUE, imprime "ERROR" si el número no vale.
+//    min: El número más pequeño permitido.
+//    max: El número más grande permitido.
+//
+// VALOR DE SALIDA:
+//
+//    Devuelve el número ya comprobado y dentro del rango.
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje(), obtenerEntero(), nuevaLinea(), mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 int pedirEnteroIntervalo (char msjtxt[], int ncols, boolean mostrarerror, int min, int max)
 {
@@ -1785,6 +1918,40 @@ int pedirEnteroIntervalo (char msjtxt[], int ncols, boolean mostrarerror, int mi
   return num;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    int pedirLetra(char msjtxt[], int ncols, boolean mostrarerror, char letra);
+//
+// USO:
+//
+//    Obliga al usuario a pulsar una letra específica para poder avanzar.
+//
+// DETALLES:
+//
+//    Esta función es muy útil para confirmaciones. Convierte tanto la letra 
+//    que tú quieres como la que el usuario escribe a MAYÚSCULAS (gracias a 
+//    toupper). Así, si pides una 'S', no importa si el usuario pulsa 's' 
+//    minúscula o 'S' mayúscula; ambas se aceptarán como válidas. Si pulsa 
+//    cualquier otra, se mostrará un error y se repetirá la pregunta.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El mensaje que se muestra (ej: "¿Deseas salir? Pulse S").
+//    ncols: Espacio de margen a la izquierda.
+//    mostrarerror: Si es TRUE, avisa con un mensaje de "ERROR" si falla.
+//    letra: La letra exacta que el usuario debe pulsar.
+//
+// VALOR DE SALIDA:
+//
+//    Devuelve la letra que el usuario pulsó (ya convertida a mayúsculas).
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje(), mostrar(), obtenerLetra(), toupper(), nuevaLinea(), mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 int pedirLetra (char msjtxt[], int ncols, boolean mostrarerror, char letra)
 {
@@ -1815,6 +1982,39 @@ int pedirLetra (char msjtxt[], int ncols, boolean mostrarerror, char letra)
   return pedida;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    int pedirConfirmacion(char msjtxt[], int ncols, boolean mostrarerror);
+//
+// USO:
+//
+//    Obliga al usuario a responder con un "SÍ" o un "NO" para continuar.
+//
+// DETALLES:
+//
+//    Esta función es ideal para decisiones críticas (como borrar un archivo 
+//    o salir del juego). Utiliza dos constantes (SI y NO) para mostrar las 
+//    opciones entre corchetes. Si el usuario pulsa cualquier otra tecla, 
+//    la función considera que es un error, le avisa y le obliga a elegir 
+//    una de las dos opciones válidas.
+//
+// PARÁMETROS DE ENTRADA:
+//
+//    msjtxt[]: El mensaje de pregunta (ej: "¿Deseas borrar la partida?").
+//    ncols: Espacio de margen a la izquierda.
+//    mostrarerror: Si es TRUE, muestra un aviso de "ERROR" al fallar.
+//
+// VALOR DE SALIDA:
+//
+//    Devuelve la letra que eligió el usuario (ya sea la constante SI o NO).
+//
+// FUNCIONES DE LAS QUE DEPENDE:
+//
+//    mensaje(), obtenerLetra(), toupper(), nuevaLinea(), mensaje_x_y()
+//
+/////////////////////////////////////////////////////////////////////////////
 
 int pedirConfirmacion (char msjtxt[], int ncols, boolean mostrarerror)
 {
@@ -1843,6 +2043,28 @@ int pedirConfirmacion (char msjtxt[], int ncols, boolean mostrarerror)
   return letra;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    boolean validarLetraUnica(char original, char dada, boolean sensibleamayusculas);
+//
+// USO:
+//    Compara dos letras y devuelve TRUE si son iguales.
+//
+// DETALLES:
+//    Permite elegir si la comparación ignora las mayúsculas (usando FALSE).
+//    Si no es sensible, convierte ambas letras a mayúsculas antes de comparar.
+//
+// PARÁMETROS:
+//    original: Letra de referencia.
+//    dada: Letra a comprobar.
+//    sensibleamayusculas: TRUE (estricto) / FALSE (ignora mayúsculas/minúsculas).
+//
+// RETORNO:
+//    TRUE si coinciden, FALSE si no.
+//
+/////////////////////////////////////////////////////////////////////////////
 
 boolean validarLetraUnica (char original, char dada, boolean sensibleamayusculas)
 {
@@ -1855,6 +2077,28 @@ boolean validarLetraUnica (char original, char dada, boolean sensibleamayusculas
   return (original == dada);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    boolean validarLetraConjunto(char letra, char seleccion[], boolean sensibleamayusculas);
+//
+// USO:
+//    Comprueba si una letra pertenece a un grupo de letras aceptables.
+//
+// DETALLES:
+//    Recorre una lista (string) buscando la letra. Si la encuentra, devuelve TRUE.
+//    Permite decidir si importa la diferencia entre mayúsculas y minúsculas.
+//
+// PARÁMETROS:
+//    letra: La letra que queremos verificar.
+//    seleccion[]: La lista de letras válidas (ej: "aeiou" para vocales).
+//    sensibleamayusculas: TRUE (estricto) / FALSE (ignora mayúsculas).
+//
+// RETORNO:
+//    TRUE si la letra está en la lista, FALSE si no está.
+//
+/////////////////////////////////////////////////////////////////////////////
 
 boolean validarLetraConjunto (char letra, char seleccion[], boolean sensibleamayusculas)
 {
@@ -1873,6 +2117,28 @@ boolean validarLetraConjunto (char letra, char seleccion[], boolean sensibleamay
   return resultado;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    char *cadenaOpcionesDisponibles(char entrada[]);
+//
+// USO:
+//    Convierte un grupo de letras en una lista separada por barras (ej: "ABC" -> "A/B/C").
+//
+// DETALLES:
+//    Reserva memoria dinámica (malloc) para crear una nueva cadena de texto.
+//    Recorre la entrada insertando una '/' entre cada carácter y finaliza
+//    correctamente la cadena con '\0'. Si la entrada es NULL o vacía, lo gestiona.
+//
+// PARÁMETROS:
+//    entrada[]: Las letras que quieres formatear.
+//
+// RETORNO:
+//    Un puntero a la nueva cadena formateada. 
+//    
+//
+/////////////////////////////////////////////////////////////////////////////
 
 char *cadenaOpcionesDisponibles (char entrada[])
 {
@@ -1919,6 +2185,32 @@ char *cadenaOpcionesDisponibles (char entrada[])
   return textofinal;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    int pedirLetraSeleccion(char msjtxt[], int ncols, boolean mostrarerror, 
+//                            char seleccion[], boolean sensibleamayusculas);
+//
+// USO:
+//    Muestra un mensaje con varias opciones y obliga a elegir una de ellas.
+//
+// DETALLES:
+//    Crea visualmente la lista de opciones (ej: [A/B/C]) usando memoria 
+//    dinámica. Comprueba si la tecla pulsada está en el grupo permitido y, 
+//    al terminar, libera la memoria usada y devuelve la letra validada.
+//
+// PARÁMETROS:
+//    msjtxt[]: El texto de la pregunta.
+//    ncols: Margen izquierdo.
+//    mostrarerror: TRUE para avisar si el usuario falla.
+//    seleccion[]: Letras válidas juntas (ej: "WASD").
+//    sensibleamayusculas: Si importa distinguir 'a' de 'A'.
+//
+// RETORNO:
+//    La letra elegida (en mayúsculas si no es sensible).
+//
+/////////////////////////////////////////////////////////////////////////////
 
 int pedirLetraSeleccion (char msjtxt[], int ncols, boolean mostrarerror, char seleccion[], boolean sensibleamayusculas)
 {
@@ -1968,6 +2260,29 @@ int pedirLetraSeleccion (char msjtxt[], int ncols, boolean mostrarerror, char se
 
 #include <conio.h>
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    char obtenerTeclaInteractiva(void);
+//
+// USO:
+//    Captura una tecla al instante, incluyendo flechas de dirección.
+//
+// DETALLES:
+//    Usa _getch() para leer sin esperar al Enter. Si detecta un código de 
+//    "tecla especial" (0 o 224), realiza una segunda lectura para saber 
+//    qué flecha es. También normaliza teclas como Enter o Retroceso para 
+//    que el resto del programa las entienda fácilmente.
+//
+// PARÁMETROS:
+//    Ninguno.
+//
+// RETORNO:
+//    El carácter de la tecla pulsada o una constante (ARRIBA, ABAJO, etc.).
+//
+/////////////////////////////////////////////////////////////////////////////
+
 char obtenerTeclaInteractiva(void)
 {
   int caracter = _getch();   // En Windows, getch() ya es bloqueante por defecto.
@@ -2004,6 +2319,29 @@ char obtenerTeclaInteractiva(void)
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIÓN:
+//
+//    int obtenerTeclaInteractiva(void);
+//
+// USO:
+//    Captura teclas al instante (sin pulsar ENTER) en sistemas Linux/Unix.
+//
+// DETALLES:
+//    Modifica temporalmente la terminal para desactivar el "modo canónico" 
+//    (que espera al ENTER) y el "eco" (que muestra lo que escribes). 
+//    Gestiona secuencias de escape complejas para traducir las flechas 
+//    del teclado ('A', 'B', 'C', 'D') en comandos que el programa entienda.
+//
+// PARÁMETROS:
+//    Ninguno.
+//
+// RETORNO:
+//    El código de la tecla pulsada (Normal o Especial).
+//
+/////////////////////////////////////////////////////////////////////////////
 
 int obtenerTeclaInteractiva(void)
 {
