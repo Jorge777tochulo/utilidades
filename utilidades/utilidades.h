@@ -166,7 +166,7 @@ int     obtenerTeclaInteractiva   (void);
 int     pedirEntero               (char msjtxt[], int ncols);
 int     pedirEnteroPositivo       (char msjtxt[], int ncols, boolean mostrarerror);
 int     pedirEnteroIntervalo      (char msjtxt[], int ncols, boolean mostrarerror, int min, int max);
-int     pedirLetra                (char msjtxt[], int ncols, boolean mostrarerror, char letra);
+char     pedirLetra                (char msjtxt[], int ncols, boolean mostrarerror, char letra);
 int     pedirConfirmacion         (char msjtxt[], int ncols, boolean mostrarerror);
 int     pedirLetraSeleccion       (char msjtxt[], int ncols, boolean mostrarerror, char seleccion[], boolean sensibleamayusculas);
 

@@ -1953,7 +1953,7 @@ int pedirEnteroIntervalo (char msjtxt[], int ncols, boolean mostrarerror, int mi
 //
 /////////////////////////////////////////////////////////////////////////////
 
-int pedirLetra (char msjtxt[], int ncols, boolean mostrarerror, char letra)
+char pedirLetra (char msjtxt[], int ncols, boolean mostrarerror, char letra)
 {
   char pedida;
   
